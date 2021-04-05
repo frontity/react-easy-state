@@ -4,7 +4,7 @@ import {
   unobserve,
   raw,
   isObservable,
-} from '@nx-js/observer-util';
+} from '@frontity/observer-util';
 
 import { hasHooks } from './utils';
 
