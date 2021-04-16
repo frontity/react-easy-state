@@ -39,5 +39,22 @@ describe('forwardRef', () => {
         </div>
       `);
     });
+
+    test('should re-render when store changes', () => {
+      let renderCount = 0;
+      const person = store({ name: 'Bob' });
+      const MyComp = view(
+        forwardRef(() => {
+          renderCount += 1;
+          return <div>{person.name}</div>;
+        }),
+      );
+      const { container } = render(<MyComp />);
+      expect(renderCount).toBe(1);
+      expect(container).toHaveTextContent('Bob');
+      person.name = 'Ann';
+      expect(renderCount).toBe(2);
+      expect(container).toHaveTextContent('Ann');
+    });
   });
 });
